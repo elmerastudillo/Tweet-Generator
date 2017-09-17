@@ -1,10 +1,11 @@
-from random import random
+import random
+
+def scrambleList(lst):
+    rand_index = random.randint(0, len(lst) - 1)
+    for i in range(len(lst)):
+        lst[i], lst[rand_index] = lst[rand_index], lst[i]
 
 # Getting input from user and then splitting by space
 words = input("Enter words: ").split(" ")
-random.shuffle(words)
-print(' '.join(words))
-#
-# rand_index = random.randint(0, len(words) - 1)
-# wordsRandom = random.shuffle(words)
-# print(wordsRandom)
+scrambleList(words)
+print(words)
