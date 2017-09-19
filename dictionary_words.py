@@ -5,9 +5,9 @@ import random
 # shuffle through content and return words by number user entered
 # loop the number of times the user inputs by using the range function
 
-def get_object_from_list(list, int):
-    for _ in range(int):
-        rand_index = random.randint(0, len(list) - 1)
+def get_object_from_list(lst, index):
+    for _ in range(index):
+        rand_index = random.randint(0, len(lst) - 1)
         value = content[rand_index]
         print(value)
 
