@@ -15,7 +15,7 @@ def histogram():
             # print(i)
             histogram_dict[i] += 1
         else:
-            histogram_dict[i] = 0
+            histogram_dict[i] = 1
     path.close()
     return histogram_dict
 
