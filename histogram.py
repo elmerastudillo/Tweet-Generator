@@ -8,6 +8,7 @@ def text_file_list(file_path):
         # Converting .txt file in list of string and stripping \n from the end
         word_list = [word for line in f for word in line.split(" ")]
         word_clean_list = list(map(str.strip, word_list))
+
         f.close
         # print(word_clean_list)
         return word_clean_list
@@ -29,17 +30,23 @@ def histogram(word_list):
 # Setting histogram return value to unique_w
 
 
-unique_w = histogram(txt_list)
+word_dictionary = histogram(txt_list)
 # print(unique_w)
 
 
 # Function to return all unique words in Histogram
-def unique_words(dict):
-    """Return all unique words in Histogram."""
-    return len(dict)
+# def unique_words(dict):
+#     """Return all unique words in Histogram."""
+#     unique_words_list = []
+#     for word, value in dict.items:
+#         break
+        # print(word)
+    #     if word[1] == 1:
+    #         unique_words_list.append(word)
+    # return len(unique_words_list)
 
 
-unique_words(unique_w)
+# unique_words(word_dictionary)
 
 
 def frequency(word, histogram):
