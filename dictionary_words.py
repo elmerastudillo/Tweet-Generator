@@ -9,7 +9,7 @@ def get_object_from_list(lst, index):
     for _ in range(index):
         rand_index = random.randint(0, len(lst) - 1)
         value = content[rand_index]
-        print(value)
+        # print(value)
 
 text_file = open("/usr/share/dict/words")
 content = [word.rstrip('\n') for word in text_file]
