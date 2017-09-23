@@ -5,14 +5,19 @@ import random
 # shuffle through content and return words by number user entered
 # loop the number of times the user inputs by using the range function
 
+
 def get_object_from_list(lst, index):
+    """Get random object from list"""
     for _ in range(index):
         rand_index = random.randint(0, len(lst) - 1)
         value = content[rand_index]
-        # print(value)
+        print(value)
 
-text_file = open("/usr/share/dict/words")
-content = [word.rstrip('\n') for word in text_file]
-number = int(input("Enter number:"))
-get_object_from_list(content, number)
-text_file.close()
+
+if __name__ == '__main__':
+
+    text_file = open("/usr/share/dict/words")
+    content = [word.rstrip('\n') for word in text_file]
+    number = int(input("Enter number:"))
+    get_object_from_list(content, number)
+    text_file.close()

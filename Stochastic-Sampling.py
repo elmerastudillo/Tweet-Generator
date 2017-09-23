@@ -34,24 +34,19 @@ def get_word_weight_dict(dictionary):
 
 def get_random_word_by_weight_prob(dictionary):
     """Returning a random word calculated by using relative probability."""
-    # print(dictionary)
-    # total_weight = sum(dictionary.values())
-    # uniform() takes parameters , wherein you can submit the range of the random number
-    random_int = random.random()
+    random_float = random.random()
     cumulative_probability = 0.0
     for (word, word_weight) in dictionary.items():
         # computing the increasing cumulative probability
         cumulative_probability += word_weight
         # until the cumulative_probability becomes greater than the random_int
-        if random_int < cumulative_probability:
+        if random_float < cumulative_probability:
             break
     return word
 
 
 if __name__ == '__main__':
-    import sys
 
-    # print(get_random(word_dictionary))
-    # print(get_probabilty_by_weight(word_dictionary))
-    weight = get_word_weight_dict(word_dictionary)
-    print(get_random_word_by_weight_prob(weight))
+    for _ in range(1, 10):
+        dictionary = get_word_weight_dict(word_dictionary)
+        print(get_random_word_by_weight_prob(dictionary))

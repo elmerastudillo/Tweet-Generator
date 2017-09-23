@@ -1,5 +1,5 @@
 """Histogram project."""
-path = "/Users/elmerastudillo/Desktop/MakeSchool_Computer_Science2/Tweet-Generator/The_Journal_of_Prison_Discipline.txt"
+
 
 def text_file_list(file_path):
     """Grabs the .txt file and parses it into a list of words."""
@@ -12,9 +12,6 @@ def text_file_list(file_path):
         f.close
         # print(word_clean_list)
         return word_clean_list
-
-
-txt_list = text_file_list(path)
 
 
 def histogram(word_list):
@@ -30,23 +27,13 @@ def histogram(word_list):
 # Setting histogram return value to unique_w
 
 
-word_dictionary = histogram(txt_list)
-# print(unique_w)
-
-
-# Function to return all unique words in Histogram
-# def unique_words(dict):
-#     """Return all unique words in Histogram."""
-#     unique_words_list = []
-#     for word, value in dict.items:
-#         break
-        # print(word)
-    #     if word[1] == 1:
-    #         unique_words_list.append(word)
-    # return len(unique_words_list)
-
-
-# unique_words(word_dictionary)
+def unique_words(dictionary):
+    """Return all unique words in Histogram."""
+    unique_words_list = []
+    for word, value in dictionary.items:
+        if value == 1:
+            unique_words_list.append(word)
+    return len(unique_words_list)
 
 
 def frequency(word, histogram):
@@ -57,4 +44,9 @@ def frequency(word, histogram):
         print("Word doesn't exist")
 
 
-# frequency("up", unique_w)
+if __name__ == '__main__':
+    path = "/Users/elmerastudillo/Desktop/MakeSchool_Computer_Science2/Tweet-Generator/The_Journal_of_Prison_Discipline.txt"
+    txt_list = text_file_list(path)
+    word_dictionary = histogram(txt_list)
+    unique_word_list = unique_words(word_dictionary)
+    print(unique_word_list)
