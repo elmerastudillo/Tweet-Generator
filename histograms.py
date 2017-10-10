@@ -89,7 +89,7 @@ def test_histogram(text_list):
 
     hist_dict = Dictogram(text_list)
     print('dictogram:', hist_dict)
-    index = list(hist_dict.return_weighted_random_word())
+    index = hist_dict.return_weighted_random_word()
     print(index)
 
     hist_list = Listogram(text_list)

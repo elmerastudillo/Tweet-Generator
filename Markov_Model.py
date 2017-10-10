@@ -1,4 +1,5 @@
-from  import Dictogram
+from histograms import Dictogram
+import pwd
 
 
 def markov_chain(data):
@@ -15,5 +16,6 @@ def markov_chain(data):
 
 if __name__ == '__main__':
     text_file = open('The_Journal_of_Prison_Discipline.txt')
-    text_list = [word.rstrip('/n') for word in text_file]
-    markov_chain(text_list)
+    text_file_dict = Dictogram(text_file)
+    # text_list = [word.rstrip('/n') for word in text_file_dict]
+    markov_chain(text_file_dict)
