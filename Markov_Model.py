@@ -1,21 +1,22 @@
 from histograms import Dictogram
 import pwd
+from cleanup import clean_file
 
 
 def markov_chain(data):
-
-    markov_model = dict()
-
-    for i in range(0, len(data) - 1):
-        if data[i] in markov_model:
-            markov_model[data[i]].update(data + 1)
+    """markov model for 1st ordergi"""
+    markov_chain = dict()
+    # Looping through the ammount of indexs in the list
+    for index in range(0, len(data) - 1):
+        # If 
+        if data[index] in markov_chain:
+            markov_chain[data[index]].update([data[index + 1]])
         else:
-            markov_model[Dictogram(data[i + 1])]
-    return markov_model
+            markov_chain[data[index]] = Dictogram([data[index + 1]])
+    return markov_chain
 
 
 if __name__ == '__main__':
-    text_file = open('The_Journal_of_Prison_Discipline.txt')
-    text_file_dict = Dictogram(text_file)
-    # text_list = [word.rstrip('/n') for word in text_file_dict]
-    markov_chain(text_file_dict)
+    clean_text_list = clean_file('The_Journal_of_Prison_Discipline.txt')
+    # print(clean_text_list)
+    print(markov_chain(clean_text_list))
