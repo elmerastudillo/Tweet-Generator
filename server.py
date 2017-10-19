@@ -4,6 +4,7 @@ from flask import Flask
 # from histogram import histogram
 # from histogram import text_file_list
 import Markov_Model
+import cleanup
 
 app = Flask(__name__)
 
