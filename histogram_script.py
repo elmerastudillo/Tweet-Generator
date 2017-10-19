@@ -37,7 +37,7 @@ def histogram_tuples(words):
     return hgram
 
 def find(item,histogram):
-   for index, pair in enumerate(histogram):
+   for index, pair in enumerate(histogram): 
     if pair[0] == item:
         print("The index is " + index)
         return index
@@ -50,11 +50,11 @@ def list_of_words(length):
     return all_words[0:length]
 
 def count(word,histogram):
-    index = find(word, histogram)
+    index = find(word, histogram) # Linear time
     if index:
-        word_count_pair = histogram[index]
+        word_count_pair = histogram[index] #  Constant time
         print(word_count_pair)
-        return word_count_pair[1]
+        return word_count_pair[1] # Constant time
     else:
         return 0
 

@@ -41,15 +41,18 @@ class Dictogram(dict):
         # Step 1: Generate random number between 0 and total count - 1
         random_int = random.randint(0, self.tokens-1)
         index = 0
-        list_of_keys = self.keys()
+        list_of_keys = list(self.keys())
+        # self.types
+
         # print 'the random index is:', random_int
         pdb.set_trace()
-        for i in range(0, self.types):
-            index += self[list_of_keys[i]]
+        # for i in range(0, list_of_keys):
+        for key in list_of_keys:
+            index += self[key]
             # print index
             if(index > random_int):
                 # print(list_of_keys[i])
-                return list_of_keys[i]
+                return key
 
 
 class Listogram(list):
