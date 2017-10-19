@@ -3,7 +3,7 @@ from flask import Flask
 # from StochasticSampling import get_random_word_by_weight_prob
 # from histogram import histogram
 # from histogram import text_file_list
-from markov_model import markov_model
+from markov_model import markov_chain
 from markov_model import generate_sentence
 from cleanup import clean_file
 
@@ -15,7 +15,7 @@ app = Flask(__name__)
 @app.route('/')
 def sentence():
     clean_text_list = clean_file('corpus.txt')
-    markov_chain = markov_model(clean_text_list)
+    markov_chain = markov_chain(clean_text_list)
     # higher_order_markov_chain = nth_order_markov_model(2, clean_text_list)
     sentence = generate_sentence(10, markov_chain)
     return sentence

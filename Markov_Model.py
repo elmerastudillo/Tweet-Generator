@@ -39,7 +39,7 @@ class Markov:
         word = list(words.append(self.get_next('[Start]')))
 
 
-def markov_model(data):
+def markov_chain(data):
     """markov model for 1st order"""
     #Dictionary that stores windows as the key in the key-value pair and then the value 
     #for each key is a dictogram
@@ -135,7 +135,7 @@ if __name__ == '__main__':
     clean_text_list = clean_file('corpus.txt')
     # print(clean_text_list)
     # print(markov_chain(clean_text_list))
-    markov_chain = markov_model(clean_text_list)
+    markov_chain = markov_chain(clean_text_list)
     # higher_order_markov_chain = nth_order_markov_model(2, clean_text_list)
     print(markov_chain)
     sentence = generate_sentence(10, markov_chain)
