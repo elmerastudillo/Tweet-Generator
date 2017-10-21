@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def sentence():
-    clean_text_list = clean_file('corpus.txt')
+    clean_text_list = clean_filse('corpus.txt')
     markov_chain = markov_chain(clean_text_list)
     # higher_order_markov_chain = nth_order_markov_model(2, clean_text_list)
     sentence = generate_sentence(10, markov_chain)
