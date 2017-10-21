@@ -12,7 +12,7 @@ from cleanup import clean_file
 app = Flask(__name__)
 
 
-@app.route('/sentence')
+@app.route('/')
 def markov():
     clean_text_list = clean_file('corpus.txt')
     markov_word = markov_chain(clean_text_list)
