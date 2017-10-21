@@ -11,32 +11,32 @@ from cleanup import clean_file
 #4 create the histogram for every single word
 #5 set uzp and the if else statement and acces sets those words to the Dictogram inside our list
 #6 Converting Markov to class object
-class Markov:
-    def __init__(self,iterable):
-        """Initalize with an empty dictionary of word nodes"""
-        self.nodes = {}
-        self.update(iterable)
+# class Markov:
+#     def __init__(self,iterable):
+#         """Initalize with an empty dictionary of word nodes"""
+#         self.nodes = {}
+#         self.update(iterable)
 
-    # def update(self.iterable):
-    #     pass
+#     # def update(self.iterable):
+#     #     pass
 
-    # def generate_sentence(self):
-    #     pass
+#     # def generate_sentence(self):
+#     #     pass
 
-    def update_node(self,word,next_word):
-        if word in self.nodes:
-            self.nodes[word].update([next_word])
-        else:
-            self.nodes[word] = Dictogram(next_word)
+#     def update_node(self,word,next_word):
+#         if word in self.nodes:
+#             self.nodes[word].update([next_word])
+#         else:
+#             self.nodes[word] = Dictogram(next_word)
 
-    def get_next(self, current_word):
-        dictogram = self.nodes.get(current_word, None)
-        if dictogram is None:
-            return '[END]'
-        return dictogram.get_random_word
+#     def get_next(self, current_word):
+#         dictogram = self.nodes.get(current_word, None)
+#         if dictogram is None:
+#             return '[END]'
+#         return dictogram.get_random_word
 
-    def generate_sentence(self):
-        word = list(words.append(self.get_next('[Start]')))
+#     def generate_sentence(self):
+#         word = list(words.append(self.get_next('[Start]')))
 
 
 def markov_chain(data):
