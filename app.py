@@ -3,8 +3,8 @@ from flask import Flask
 # from StochasticSampling import get_random_word_by_weight_prob
 # from histogram import histogram
 # from histogram import text_file_list
-from markov_model123 import markov_chain
-from markov_model123 import generate_sentence
+from markov_model import markov_chain
+from markov_model import generate_sentence
 from cleanup import clean_file
 
 
