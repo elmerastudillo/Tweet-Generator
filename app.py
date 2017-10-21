@@ -17,7 +17,7 @@ def markov():
     clean_text_list = clean_file('corpus.txt')
     markov_word = markov_chain(clean_text_list)
     # higher_order_markov_chain = nth_order_markov_model(2, clean_text_list)
-    sentence = generate_sentence(10, markov_words)
+    sentence = generate_sentence(10, markov_word)
     print(sentence)
     return sentence
 
