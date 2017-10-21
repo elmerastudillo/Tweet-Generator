@@ -3,7 +3,6 @@
 
 from __future__ import division, print_function
 import random
-import pdb
 
 
 class Dictogram(dict):
@@ -45,7 +44,6 @@ class Dictogram(dict):
         # self.types
 
         # print 'the random index is:', random_int
-        pdb.set_trace()
         # for i in range(0, list_of_keys):
         for key in list_of_keys:
             index += self[key]

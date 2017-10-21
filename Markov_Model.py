@@ -1,5 +1,4 @@
 from histograms import Dictogram
-import pwd
 import random
 from cleanup import clean_file
 # from collection import deque
