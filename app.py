@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def markov():
-	"""Forming sentence with markov chain"""
+    """Forming sentence with markov chain"""
     clean_text_list = clean_file('corpus.txt')
     markov_word = markov_chain(clean_text_list)
     # higher_order_markov_chain = nth_order_markov_model(2, clean_text_list)
