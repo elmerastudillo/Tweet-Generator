@@ -1,12 +1,8 @@
 from flask import Flask
-# from StochasticSampling import get_word_weight_dict
-# from StochasticSampling import get_random_word_by_weight_prob
-# from histogram import histogram
-# from histogram import text_file_list
 from markov_model import markov_chain
 from markov_model import generate_sentence
-from markov_model import generate_random_sentence_n
-from markov_model import nth_order_markov_model
+# from markov_model import generate_random_sentence_n
+# from markov_model import nth_order_markov_model
 from cleanup import clean_file
 
 
@@ -21,19 +17,18 @@ def markov():
     markov_word = markov_chain(clean_text_list)
     # higher_order_markov_chain = nth_order_markov_model(2, clean_text_list)
     sentence = generate_sentence(10, markov_word)
-    print(sentence)
     return sentence
 
 
-@app.route("/sentence")
-def n_markov():
-	"""nth order markov sentence"""
-	# TODO: Need to fix
-	word_sentence = []
-	file_path = "corpus.txt"
-	markov = nth_order_markov_model(2, file_path)
-	sentence = generate_random_sentence_n(10, markov)
-	return sentence
+# @app.route("/sentence_n")
+# def n_markov():
+# 	"""nth order markov sentence (Fixing)"""
+# 	# TODO: Need to fix
+# 	word_sentence = []
+# 	file_path = "corpus.txt"
+# 	markov = nth_order_markov_model(2, file_path)
+# 	sentence = generate_random_sentence_n(10, markov)
+# 	return sentence
 
 if __name__ == "__main__":
     app.run(debug = True)
