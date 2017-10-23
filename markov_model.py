@@ -1,41 +1,8 @@
 from histograms import Dictogram
 import random
 from cleanup import clean_file
-# from collection import deque
-
-# Used Dictorgram class to access my histogram
-#1 Used dictionary as data structure to create the markov chain
-#2 For every word in the cleaned file - go through and update a historgram for the value
-#3 Generate those tokens inside each historgram. 
-#4 create the histogram for every single word
-#5 set uzp and the if else statement and acces sets those words to the Dictogram inside our list
-#6 Converting Markov to class object
-class Markov:
-    def __init__(self,iterable):
-        """Initalize with an empty dictionary of word nodes"""
-        self.nodes = {}
-        self.update(iterable)
-
-    # def update(self.iterable):
-    #     pass
-
-    # def generate_sentence(self):
-    #     pass
-
-    def update_node(self,word,next_word):
-        if word in self.nodes:
-            self.nodes[word].update([next_word])
-        else:
-            self.nodes[word] = Dictogram(next_word)
-
-    def get_next(self, current_word):
-        dictogram = self.nodes.get(current_word, None)
-        if dictogram is None:
-            return '[END]'
-        return dictogram.get_random_word
-
-    def generate_sentence(self):
-        word = list(words.append(self.get_next('[Start]')))
+from collections import deque
+import re
 
 
 def markov_chain(data):
@@ -53,20 +20,21 @@ def markov_chain(data):
             markov_chain[data[index]] = Dictogram([data[index + 1]])
     return markov_chain
 
-# Nth Order Markon Model Structure
 def nth_order_markov_model(order, data):
     markov_model = dict()
 
     for i in range(0, len(data)-order):
-        #Creating the windowe
+        # Creatjng the window
         window = tuple(data[i: i+order])
-        # Adding to dictionary
+        # If windiw is already in the markov model
         if window in markov_model:
-            #Append to existing Dictogram 
+            # Update the value
             markov_model[window].update([data[i+order]])
         else:
+            # Add the value
             markov_model[window] = Dictogram([data[i+order]])
     return markov_model
+
 
 # Walk our model
 def generate_random_start(model):
@@ -108,36 +76,66 @@ def generate_sentence(length, markov_model):
     return ' '.join(sentence) + '.'
     return sentence
 
-# Generating sentence using nth order markov_model
-def generate_sentence_with_nth_order(length, higher_order_markov_model):
-    # length parameter is length of the sentence
-    # Create first word
-    current_word = generate_random_start(higher_order_markov_model)
-    # Save first word to sentence list
-    sentence = [current_word]
-    # Loop through the length of sentence provided
-    for i in range(0, length):
-        # Getting current dictogram and starting from the current word(first word)
-        current_dictogram = higher_order_markov_model[current_word]
-        # Getting random word from dictogram starting from the place of the current word
-        random_word = current_dictogram.return_weighted_random_word()
-        # Setting current word variable to the random word
-        current_word = random_word
-        # Append the new current word until the sentence length is formed
-        sentence.append(current_word)
-    sentence[0] = sentence[0].capitalize()
-    return ' '.join(sentence) + '.'
-    return sentence
+# Provided by Jeff Chiu
+def generate_random_sentence_n(length, markov_model):
+    # Length denotes the max amount of chars
+    # connect to twitter API
+    current_window = get_start_token(markov_model)
+    sentence = [current_window[0]]
+    tweet = ''
+
+    valid_tweet_flag = True
+    sentence_count = 0
+    while valid_tweet_flag:
+        # We will generate random sentences until we decide we can not any more
+        current_dictogram = markov_model[current_window]
+        random_weighted_word = current_dictogram.return_weighted_random_word()
+
+        current_window_deque = deque(current_window)
+        current_window_deque.popleft()
+        current_window_deque.append(random_weighted_word)
+        current_window = tuple(current_window_deque)
+        sentence.append(current_window[0])
+        # print ('my current word inside windows: ' + str(current_window[1]))
+        # print ('my current window: ' + str(current_window))
+        if current_window[1] == 'end' or current_window[1] == '[end]':
+            sentence_string = ' '.join(sentence)
+            sentence_string = re.sub('end', '. ', sentence_string, flags=re.IGNORECASE)
+            sentence_string = sentence_string.capitalize()
+            new_tweet_len = len(sentence_string) + len(tweet)
+
+            if sentence_count == 0 and new_tweet_len < length:
+                # We should add this sentence to the tweet and move on to
+                # make another
+                tweet += sentence_string
+                sentence_string = ' '.join(sentence)
+                sentence_count += 1
+                current_window = generate_random_start(markov_model)
+                sentence = [current_window[0]]
+            elif sentence_count == 0 and new_tweet_len >= length:
+                # forget the sentence and generate a new one :P
+                current_window = generate_random_start(markov_model)
+                sentence = [current_window[0]]
+            elif sentence_count > 0 and new_tweet_len < length:
+                # More than one sentence. and length is still less max
+                # Get another new sentence
+                tweet += sentence_string
+                sentence_string = ' '.join(sentence)
+                sentence_count += 1
+                current_window = generate_random_start(markov_model)
+                sentence = [current_window[0]]
+            else:
+                # Return this good good tweet
+                return tweet
 
 
 if __name__ == '__main__':
     clean_text_list = clean_file('corpus.txt')
     # print(clean_text_list)
     # print(markov_chain(clean_text_list))
-    markov_chain = markov_chain(clean_text_list)
-    # higher_order_markov_chain = nth_order_markov_model(2, clean_text_list)
-    print(markov_chain)
-    sentence = generate_sentence(10, markov_chain)
-    # sentence = generate_sentence_with_higher_order(10, higher_order_markov_chain)
-    print(sentence)
-
+    # markov_chain = markov_chain(clean_text_list)
+    # # higher_order_markov_chain = nth_order_markov_model(2, clean_text_list)
+    # print(markov_chain)
+    # sentence = generate_sentence(10, markov_chain)
+    # # sentence = generate_sentence_with_higher_order(10, higher_order_markov_chain)
+    # print(sentence)
